@@ -20,16 +20,48 @@
     --cor-texto-secundario: #7C7C8A;
 }
 
+.sr-only{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    right: 0;
+    top: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
 body{
-    font-size: 1.6rem;
+    font-size: 1.6rem;    
+    background-color: var(--cor-de-fundo);
+}
+
+body, button, a{
+    color: var(--cor-texto-primario);
 }
 
 body * {
     font-family: var(--fonte-primaria);
-    background-color: var(--cor-de-fundo);
+    
 }
 
 button{
     background-color: var(--cor-botao);
     color: var(--cor-texto-primario);
 }
+
+#app {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 1.6rem;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
