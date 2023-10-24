@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+
+    font-size: 62.5%;
+
+    --fonte-primaria: 'Roboto', sans-serif;
+
+    --hue: 194;
+    --cor-primaria: hsl(var(--hue), 72%, 13%);
+    --cor-secundaria: hsla(var(--hue), 61%, 6%, 0.5);
+    --cor-de-fundo: hsl(var(--hue), 0%, 0%);
+    
+    --cor-botao: hsla(var(--hue), 91%, 25%, 1);
+    --cor-texto-primario: #E1E1E6;
+    --cor-texto-secundario: #7C7C8A;
+}
+
+body{
+    font-size: 1.6rem;
+}
+
+body * {
+    font-family: var(--fonte-primaria);
+    background-color: var(--cor-de-fundo);
+}
+
+button{
+    background-color: var(--cor-botao);
+    color: var(--cor-texto-primario);
+}

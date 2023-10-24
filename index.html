@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/Estrela.svg" type="image/x-icon">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="./styles.css">
+
+    <title>GitFav</title>
+</head>
+<body>
+
+    <div id="app">
+        <header style="background-color: black;">
+             <img src="./assets/Gitfav.svg" alt="">
+             <div>
+                <label for="input-searh">Digite o Github username que quer favoritar</label>
+                <input id="input-searh" placeholder="Digite o Github username que quer favoritar" type="text">
+                <button><i class="ph ph-star"></i>FAVORITAR</button>
+             </div>
+        </header>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Usuário</th>
+                    <th>Repositorios</th>
+                    <th>Seguidores</th>
+                    <th>Ação</th>
+                </tr>                
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td class="usuario">
+                        <img width="50px" src="https://github.com/nikolasmarlon.png" />
+                        <a target="_blank" href="https://github.com/nikolasmarlon">
+                            <p>Nikolas Marlon</p>
+                            <span>nikolasmarlon</span>
+                        </a>
+                    </td>
+                    <td class="repositorios">123</td>
+                    <td class="seguidores">1234</td>
+                    <td>Remover</td>
+                </tr>
+                <tr>
+                    <td class="usuario">
+                        <img width="50px" src="https://github.com/nikolasmarlon.png" />
+                        <a target="_blank" href="https://github.com/nikolasmarlon">
+                            <p>Nikolas Marlon</p>
+                            <span>nikolasmarlon</span>
+                        </a>
+                    </td>
+                    <td class="repositorios">123</td>
+                    <td class="seguidores">1234</td>
+                    <td>Remover</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
