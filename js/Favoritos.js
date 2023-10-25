@@ -1,18 +1,4 @@
-
-export class GithubUser {
-    static pesquisar(usuario){
-        const endpoint = `https:api.github.com/users/${usuario}`
-
-
-        // fetch busca as coisas na internet ( promise )  
-        return fetch(endpoint).then( dado  => dado.json()).then( ({ login, name, public_repos, followers}) => ({                 
-            login,
-            name,
-            public_repos,
-            followers
-        }))
-    }
-}
+import { GithubUser } from './GithubUser.js'
 
 // classe que vai conter a lógica dos dados
 // classe: como os dados serão estruturados
@@ -26,18 +12,50 @@ export class Favoritos{
         this.adicionar()
     }
 
-    async buscarNoGithub(username){
-       const user =  await GithubUser.pesquisar(username)
+   
 
-       //console.log(user)
+    async buscarNoGithub(username){
+        
+        try {
+
+            // verificar antes de ir pro github se o user ja existe OBS. find === encontre => devolve so o objeto, se encontrar
+            const usuarioExiste = this.entradas.find( entrada => entrada.login === username)
+
+
+            if(usuarioExiste){
+                throw new Error("Usuário já cadastrado")
+            }
+
+
+            const user =  await GithubUser.pesquisar(username)
+     
+            //console.log(user)
+
+            if(user.login === undefined){
+                throw new Error("Usuário não encontrado")
+            }
+
+            this.entradas = [user, ...this.entradas]
+
+            // depois de adicionar, preciso do update
+            this.atualizar()
+            this.salvar()
+            
+       } catch (error) {
+            alert(error.message)
+       }
     }
+
     
 
     carregar(){
 
-        this.entradas = JSON.parse(localStorage.getItem('@gitfav-favoritos')) || []
+        this.entradas = JSON.parse(localStorage.getItem('@gitfav-favoritos:')) || []        
+    }
 
-        
+
+    salvar(){
+        localStorage.setItem('@gitfav-favoritos:', JSON.stringify(this.entradas)) // transformar objeto javascript em objeto do tipo texto
     }
 
     deletar(usuario){
@@ -60,6 +78,8 @@ export class Favoritos{
         this.entradas = usuarioFiltrado
 
         this.atualizar()
+
+        this.salvar() // no localstorage
     }
 
 }
