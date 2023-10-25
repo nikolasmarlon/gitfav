@@ -17,8 +17,10 @@
     --cor-de-fundo-input: hsl(var(--hue), 65%, 7%);
     --cor-de-placeholder-input: hsl(var(--hue), 6%, 51%);
 
+    --cor-borda-tabela: hsl(var(--hue), 31%, 42%);
     
     --cor-botao: hsla(var(--hue), 91%, 25%, 1);
+    --cor-botao-remover: #F75A68;
     --cor-texto-primario: #E1E1E6;
     --cor-texto-secundario: #7C7C8A;
 }
@@ -64,6 +66,7 @@ header{
     align-items: center;
     justify-content: space-between;
     margin-top: 11.5rem;
+    margin-bottom: 8.7rem;
 }
 
 .search{
@@ -104,4 +107,92 @@ header{
 .search button:hover{
     background-color: var(--cor-texto-primario);
     color: var(--cor-botao);
+}
+
+table {
+    width: 100%;    
+    border-collapse: collapse; /* espaços entre as celulas (retura)*/    
+    
+}
+
+.table-container{
+    border-radius: 1.2rem;
+    overflow: hidden;
+    border: 1px solid var(--cor-borda-tabela);
+    
+}
+
+table * {
+    font-size: 2rem;
+    color: var(--cor-texto-primario);
+    font-weight: bold;
+}
+
+table th{
+    background: var(--cor-primaria);
+    text-align: left;
+    font-weight: bold;
+    padding: 1.6rem 4rem;   
+    
+}
+
+
+table td{    
+    padding: 1.6rem 4rem;  
+    text-align: left;  
+    
+}
+
+
+/* arredondar contos tabela - parte superior */
+table th:first-child{
+    border-top-left-radius: 1.2rem;
+    
+}
+table th:last-child{
+    border-top-right-radius: 1.2rem;
+}
+
+/* tudo que for impar */
+table tr:nth-child(odd){
+    background: var(--cor-secundaria);
+}
+
+/* tudo que for par */
+table tr:nth-child(even){
+    background: var(--cor-de-fundo-input);
+    
+}
+table tr:not(:first-child) {
+    border-top: 1px solid var(--cor-borda-tabela); /* Bordas nas linhas horizontais, exceto na primeira linha */
+}
+
+td.usuario {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    
+}
+
+td.usuario a{
+    text-decoration: none;
+}
+
+td.usuario a p {
+    font-weight: bold;
+}
+
+td .btn-remover{
+    background: none;
+    border: none;
+    color: var(--cor-botao-remover);
+    cursor: pointer;
+}
+
+td.usuario img{
+    width: 5rem;
+    height: 5rem;
+
+    object-fit: cover;
+    border-radius: 50%;
 }
