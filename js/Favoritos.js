@@ -13,26 +13,7 @@ export class Favoritos{
 
     carregar(){
 
-        this.entradas = [
-            {
-                login: 'nikolasmarlon',
-                name: 'Nikolas Marlon',
-                public_repos: '43',
-                followers: '513'
-            },
-            {
-                login: 'amarildocavalo',
-                name: 'Amarildo Cavalo',
-                public_repos: '43',
-                followers: '513'
-            },
-            {
-                login: 'josedoegito',
-                name: 'José do Egito',
-                public_repos: '43',
-                followers: '513'
-            }
-        ]
+        this.entradas = JSON.parse(localStorage.getItem('@gitfav-favoritos')) || []
 
         
     }
@@ -55,6 +36,8 @@ export class Favoritos{
         // console.log(usuarioFiltrado)
 
         this.entradas = usuarioFiltrado
+
+        this.atualizar()
     }
 
 }
