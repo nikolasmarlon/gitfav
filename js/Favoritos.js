@@ -23,8 +23,15 @@ export class Favoritos{
         this.tbody = this.root.querySelector('table tbody')
 
         this.carregar()
+        this.adicionar()
     }
 
+    async buscarNoGithub(username){
+       const user =  await GithubUser.pesquisar(username)
+
+       //console.log(user)
+    }
+    
 
     carregar(){
 
@@ -65,6 +72,23 @@ export class FavoritosVisualizacao extends Favoritos{
         this.atualizar()
 
         //console.log(this.root)
+    }
+
+
+    adicionar(){
+
+        // root é o #app
+
+        const botaoAdicionar = this.root.querySelector('.search button')
+
+        botaoAdicionar.onclick = () => {
+            // pegar o valor do input 
+            const { value }= this.root.querySelector('.search input')
+
+            // console.log(value)
+
+            this.buscarNoGithub(value)
+        }
     }
 
 
