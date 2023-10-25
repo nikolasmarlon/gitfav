@@ -110,16 +110,31 @@ header{
 }
 
 table {
-    width: 100%;    
+    width: 100%;  
+    max-height: 200px;  
     border-collapse: collapse; /* espaços entre as celulas (retura)*/    
-    
+    overflow-y: scroll;   
+}
+
+
+
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #202024;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #09090A;
 }
 
 .table-container{
     border-radius: 1.2rem;
     overflow: hidden;
     border: 1px solid var(--cor-borda-tabela);
-    
 }
 
 table * {
