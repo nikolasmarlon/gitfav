@@ -113,16 +113,22 @@ export class FavoritosVisualizacao extends Favoritos{
 
 
     // usada para atualizar um dado ou remover um elemento 
-    atualizar() {
+    //atualizar() {
 
         // Primeiro passo - remover todos o trs da tabela
+                   
         this.removerTodosTrs() 
+            
+        
 
         
         this.entradas.forEach( user => {
+
+            
             const linha = this.criarLinha()
             
             linha.querySelector('.usuario img').src = `https://github.com/${user.login}.png` // mudar src da imagem
+            linha.querySelector('.usuario a').href = `https://github.com/${user.login}` // mudar link
             linha.querySelector('.usuario img').alt = `Imagem do(a) ${user.name}`
             linha.querySelector('.usuario p').textContent = user.name
             linha.querySelector('.usuario span').textContent = user.login
@@ -175,12 +181,13 @@ export class FavoritosVisualizacao extends Favoritos{
             <td><button  class="btn-remover">Remover</button></td>
         
         `
-
-        return tr
+        
+        
+            return tr
+        
     }
 
-    removerTodosTrs(){
-        
+    removerTodosTrs(){        
 
         this.tbody.querySelectorAll('tr').forEach( (tr) => {
             tr.remove()

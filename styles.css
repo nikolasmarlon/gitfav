@@ -23,6 +23,7 @@
     --cor-botao-remover: #F75A68;
     --cor-texto-primario: #E1E1E6;
     --cor-texto-secundario: #7C7C8A;
+    --cor-aviso: hsl(189, 4%, 32%)
 }
 
 .sr-only{
@@ -168,6 +169,46 @@ table td{
     padding: 1.6rem 4rem;  
     text-align: left;  
     
+}
+
+table td:first-child{
+    width: 50rem ;
+}
+table th:first-child{
+    width: 50rem;
+}
+
+.aviso-inicial {
+    width: 100%;
+    height: 62.4rem;
+    background-color: red;
+    
+}
+
+.aviso-inicial td{
+    width: 100%;
+    height: 100%;
+    
+}
+
+.aviso-inicial div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6rem;
+}
+
+.aviso-inicial div img{
+    width: 12.5rem;
+}
+
+.aviso-inicial div h1{
+    font-size: 4rem;
+    color: var(--cor-aviso);
+}
+
+#aviso:not(.aviso-inicial){
+    display: none;
 }
 
 
