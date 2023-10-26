@@ -163,7 +163,9 @@ export class FavoritosVisualizacao extends Favoritos{
         } else {
 
             const linha2 = this.criarLinha()
-            console.log(linha2)
+            linha2.querySelector('.aviso-inicial h1').textContent = "Nenhum favorito ainda"
+
+
             this.tbody.append(linha2)
 
         }
@@ -179,10 +181,12 @@ export class FavoritosVisualizacao extends Favoritos{
 
         
         // 2.2
-        let elementoHtml = document.createElement('tr') // Criado com a DOM via javascript
+        let elementoHtml 
         
 
-        if(this.entradas.length > 0 ){             
+        if(this.entradas.length > 0 ){    
+            
+            elementoHtml = document.createElement('tr') // Criado com a DOM via javascript
             // 2.3 Obs - o <tr></tr> (container ) precisa ser criado com a DOM
             elementoHtml.innerHTML = `       
                 <td class="usuario">
@@ -198,16 +202,16 @@ export class FavoritosVisualizacao extends Favoritos{
             `
         }  else {
 
-            elementoHtml = document.createElement('tbody') // Criado com a DOM via javascript
+            elementoHtml = document.createElement('tr') // Criado com a DOM via javascript
             elementoHtml.innerHTML = `
-                <tr id="aviso" class="usuario aviso-inicial">
-                    <td colspan="4" >
+                
+                    <td  class="aviso-inicial" colspan="4" >
                         <div>
                             <img width="50px" src="./assets/Estrela.svg" />
                             <h1>Nenhum favorito ainda</h1>                           
                         </div>
                     </td>                    
-                </tr>
+                
             
             `
         }
@@ -218,6 +222,7 @@ export class FavoritosVisualizacao extends Favoritos{
     removerTodosTrs(){    
         
         
+            
 
             this.tbody.querySelectorAll('tr').forEach( (tr) => {                
                     tr.remove()               
