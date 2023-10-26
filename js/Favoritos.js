@@ -10,6 +10,7 @@ export class Favoritos{
 
         this.carregar()
         this.adicionar()
+        
     }
 
    
@@ -38,8 +39,8 @@ export class Favoritos{
             this.entradas = [user, ...this.entradas]
 
             // depois de adicionar, preciso do update
-            this.atualizar()
             this.salvar()
+            this.atualizar()
             
        } catch (error) {
             alert(error.message)
@@ -50,8 +51,10 @@ export class Favoritos{
 
     carregar(){
 
-        this.entradas = JSON.parse(localStorage.getItem('@gitfav-favoritos:')) || []        
+        this.entradas = JSON.parse(localStorage.getItem('@gitfav-favoritos:')) || []   
+          
     }
+   
 
 
     salvar(){
@@ -76,6 +79,8 @@ export class Favoritos{
         // console.log(usuarioFiltrado)
 
         this.entradas = usuarioFiltrado
+
+        
 
         this.atualizar()
 
@@ -113,47 +118,58 @@ export class FavoritosVisualizacao extends Favoritos{
 
 
     // usada para atualizar um dado ou remover um elemento 
-    //atualizar() {
+    atualizar() {
 
-        // Primeiro passo - remover todos o trs da tabela
-                   
+         
         this.removerTodosTrs() 
-            
+        
+        // Primeiro passo - remover todos o trs da tabela
         
 
-        
-        this.entradas.forEach( user => {
-
+        if(this.entradas.length > 0 ){  
+            this.entradas.forEach( user => {
             
-            const linha = this.criarLinha()
-            
-            linha.querySelector('.usuario img').src = `https://github.com/${user.login}.png` // mudar src da imagem
-            linha.querySelector('.usuario a').href = `https://github.com/${user.login}` // mudar link
-            linha.querySelector('.usuario img').alt = `Imagem do(a) ${user.name}`
-            linha.querySelector('.usuario p').textContent = user.name
-            linha.querySelector('.usuario span').textContent = user.login
-            linha.querySelector('.repositorios').textContent = user.public_repos
-            linha.querySelector('.seguidores').textContent = user.followers
-
-
-
-            // OBS: addEventListener para eventos que se repetem
-            // onclick para eventos que serão disparados uma vez somente
-            linha.querySelector('.btn-remover').onclick = () => {
-                // confirm -- retorna um booleam
-                const confirmou = confirm('Tem certeza que deseja deletar?')
-
-                if(confirmou){
-                    // Lógica para deltar a entrada ( vai ficar na classe que lida com os dados ( class Favoritos ))
-                    // vai enviar o usuário
-                    this.deletar(user)
-                    //console.log(user)
+                const linha = this.criarLinha()
+                
+                linha.querySelector('.usuario img').src = `https://github.com/${user.login}.png` // mudar src da imagem
+                linha.querySelector('.usuario a').href = `https://github.com/${user.login}` // mudar link
+                linha.querySelector('.usuario img').alt = `Imagem do(a) ${user.name}`
+                linha.querySelector('.usuario p').textContent = user.name
+                linha.querySelector('.usuario span').textContent = user.login
+                linha.querySelector('.repositorios').textContent = user.public_repos
+                linha.querySelector('.seguidores').textContent = user.followers
+    
+    
+    
+                // OBS: addEventListener para eventos que se repetem
+                // onclick para eventos que serão disparados uma vez somente
+                linha.querySelector('.btn-remover').onclick = () => {
+                    // confirm -- retorna um booleam
+                    const confirmou = confirm('Tem certeza que deseja deletar?')
+    
+                    if(confirmou){
+                        // Lógica para deletar a entrada ( vai ficar na classe que lida com os dados ( class Favoritos ))
+                        // vai enviar o usuário
+                        this.deletar(user)
+                        //console.log(user)
+                    }
                 }
-            }
+
+                console.log(linha)
+                
+                // append funcionalidade da DOM, vai receber um elemento HTML criado com a dom
+                this.tbody.append(linha)
+            })
+        } else {
+
+            const linha2 = this.criarLinha()
+            console.log(linha2)
+            this.tbody.append(linha2)
+
+        }
+
             
-            // append funcionalidade da DOM, vai receber um elemento HTML criado com a dom
-            this.tbody.append(linha)
-        })
+  
 
 
     }
@@ -163,34 +179,51 @@ export class FavoritosVisualizacao extends Favoritos{
 
         
         // 2.2
-        const tr = document.createElement('tr') // Criado com a DOM via javascript
+        let elementoHtml = document.createElement('tr') // Criado com a DOM via javascript
         
-        
-        // 2.3 Obs - o <tr></tr> (container ) precisa ser criado com a DOM
-        tr.innerHTML = `
-       
-            <td class="usuario">
-                <img width="50px" src="https://github.com/nikolasmarlon.png" />
-                <a target="_blank" href="https://github.com/nikolasmarlon">
-                    <p>Nikolas Marlon</p>
-                    <span>/nikolasmarlon</span>
-                </a>
-            </td>
-            <td class="repositorios">123</td>
-            <td class="seguidores">1234</td>
-            <td><button  class="btn-remover">Remover</button></td>
-        
-        `
-        
-        
-            return tr
+
+        if(this.entradas.length > 0 ){             
+            // 2.3 Obs - o <tr></tr> (container ) precisa ser criado com a DOM
+            elementoHtml.innerHTML = `       
+                <td class="usuario">
+                    <img width="50px" src="https://github.com/nikolasmarlon.png" />
+                    <a target="_blank" href="https://github.com/nikolasmarlon">
+                        <p>Nikolas Marlon</p>
+                        <span>/nikolasmarlon</span>
+                    </a>
+                </td>
+                <td class="repositorios">123</td>
+                <td class="seguidores">1234</td>
+                <td><button  class="btn-remover">Remover</button></td>        
+            `
+        }  else {
+
+            elementoHtml = document.createElement('tbody') // Criado com a DOM via javascript
+            elementoHtml.innerHTML = `
+                <tr id="aviso" class="usuario aviso-inicial">
+                    <td colspan="4" >
+                        <div>
+                            <img width="50px" src="./assets/Estrela.svg" />
+                            <h1>Nenhum favorito ainda</h1>                           
+                        </div>
+                    </td>                    
+                </tr>
+            
+            `
+        }
+        return elementoHtml
         
     }
 
-    removerTodosTrs(){        
+    removerTodosTrs(){    
+        
+        
 
-        this.tbody.querySelectorAll('tr').forEach( (tr) => {
-            tr.remove()
-        }) // Pegar todas as linhas
+            this.tbody.querySelectorAll('tr').forEach( (tr) => {                
+                    tr.remove()               
+            }) // Pegar todas as linhas
+
+            
+        
     }
 }
